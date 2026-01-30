@@ -17,6 +17,7 @@ Supported exchanges:
     - edgex: Uses HedgeBot from hedge_mode_edgex.py (edgeX + Lighter)
     - nado: Uses HedgeBot from hedge_mode_nado.py (Nado + Lighter)
     - standx: Uses HedgeBot from hedge_mode_standx.py (StandX + Lighter)
+    - ostium: Uses HedgeBot from hedge_mode_ostium.py (Ostium + Lighter)
 
 Cross-platform compatibility:
     - Works on Linux, macOS, and Windows
@@ -49,7 +50,7 @@ Examples:
     )
     
     parser.add_argument('--exchange', type=str, required=True,
-                        help='Exchange to use (backpack, extended, apex, grvt, or edgex)')
+                        help='Exchange to use (backpack, extended, apex, grvt, edgex, nado, standx, ostium)')
     parser.add_argument('--ticker', type=str, default='BTC',
                         help='Ticker symbol (default: BTC)')
     parser.add_argument('--size', type=str, required=True,
@@ -72,7 +73,7 @@ Examples:
 
 def validate_exchange(exchange):
     """Validate that the exchange is supported."""
-    supported_exchanges = ['backpack', 'extended', 'apex', 'grvt', 'edgex', 'nado', 'standx']
+    supported_exchanges = ['backpack', 'extended', 'apex', 'grvt', 'edgex', 'nado', 'standx', 'ostium']
     if exchange.lower() not in supported_exchanges:
         print(f"Error: Unsupported exchange '{exchange}'")
         print(f"Supported exchanges: {', '.join(supported_exchanges)}")
@@ -105,6 +106,9 @@ def get_hedge_bot_class(exchange, v2=False):
             return HedgeBot
         elif exchange.lower() == 'standx':
             from hedge.hedge_mode_standx import HedgeBot
+            return HedgeBot
+        elif exchange.lower() == 'ostium':
+            from hedge.hedge_mode_ostium import HedgeBot
             return HedgeBot
         else:
             raise ValueError(f"Unsupported exchange: {exchange}")
@@ -152,7 +156,7 @@ async def main():
                 fill_timeout=args.fill_timeout,
                 max_position=args.max_position
             )
-        elif args.exchange in ['backpack', 'edgex', 'nado', 'grvt', 'standx']:
+        elif args.exchange in ['backpack', 'edgex', 'nado', 'grvt', 'standx', 'ostium']:
             bot = HedgeBotClass(
                 ticker=args.ticker.upper(),
                 order_quantity=Decimal(args.size),
