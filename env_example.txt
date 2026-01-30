@@ -33,6 +33,17 @@ ASTER_SECRET_KEY=your_aster_secret_key
 API_KEY_PRIVATE_KEY=your_api_key_private_key_here
 LIGHTER_ACCOUNT_INDEX=0
 LIGHTER_API_KEY_INDEX=0
+LIGHTER_BASE_URL=https://mainnet.zklighter.elliot.ai
+
+# Ostium Configuration (mainnet)
+# RPC URL for Arbitrum mainnet
+RPC_URL=https://arb1.arbitrum.io/rpc
+# Private key used for Ostium trading (Arbitrum)
+PRIVATE_KEY=your_ostium_private_key_here
+# Leverage used for Ostium limit orders (default 5)
+OSTIUM_LEVERAGE=5
+# LIMIT maker price offset in bps (default 5 = 0.05%)
+OSTIUM_PRICE_OFFSET_BPS=5
 
 # Extended Configuration
 EXTENDED_API_KEY=your_extended_api_key
